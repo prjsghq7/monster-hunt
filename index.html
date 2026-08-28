@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monster Hunt: Last Stand</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="gameShell" class="game-shell" tabindex="-1">
+  <section id="menuScreen" class="screen menu-screen">
+    <div class="menu-bg"></div>
+    <div class="menu-fog fog1"></div>
+    <div class="menu-fog fog2"></div>
+    <div class="menu-vignette"></div>
+    <img class="menu-keyart" src="assets/menu-hunter.png" alt="헌터 메인 비주얼">
+    <div class="menu-content">
+      <p class="eyebrow">DARK FANTASY MONSTER HUNT</p>
+      <h1>MONSTER HUNT <span>LAST STAND</span></h1>
+      <p class="menu-copy">네 명의 헌터 중 한 명을 고르고, 고대 괴수 3종과 끝없는 사냥에 도전하세요.<br>WASD 이동, 마우스 좌클릭 연사, 우클릭 특수 스킬로 30초 안에 보스를 처치합니다.</p>
+      <nav class="menu-actions">
+        <button type="button" id="startSetupBtn" class="primary menu-button"><span>01</span><b>사냥 시작</b><small>헌터, 보스, 난이도, 특성을 선택합니다</small></button>
+        <button type="button" id="recordsBtn" class="menu-button"><span>02</span><b>랭킹</b><small>보스별, 난이도별 기록을 확인합니다</small></button>
+        <button type="button" id="settingsBtn" class="menu-button"><span>03</span><b>설정</b><small>표현 효과와 화면 표시를 조절합니다</small></button>
+      </nav>
+      <div class="menu-features">
+        <div><strong>30초 핵심 루프</strong><small>시작 · 전투 · 결과 · 재도전</small></div>
+        <div><strong>고정 16:9 전장</strong><small>두 해상도에서도 통일된 비율</small></div>
+        <div><strong>로컬 저장</strong><small>설정과 랭킹은 브라우저에 보관</small></div>
+      </div>
+    </div>
+    <div class="menu-status"><span>LOCAL SAVE / NO LOGIN</span></div>
+  </section>
+
+  <section id="setupScreen" class="screen hidden panel-screen">
+    <header class="topbar">
+      <div><p class="eyebrow">HUNT PREPARATION</p><h2>사냥 준비</h2></div>
+      <button type="button" id="setupBackBtn" class="ghost-btn">ESC · 메인</button>
+    </header>
+    <div class="setup-grid">
+      <div class="selection-panel hunters-panel">
+        <h3><span>01</span> 헌터 선택</h3>
+        <div id="characterChoices" class="hunter-cards">
+          <button type="button" class="hunter-card selected" data-character="striker">
+            <span class="hunter-sprite-preview" data-character-preview="striker" aria-hidden="true"></span>
+            <div>
+              <strong>VANGUARD</strong>
+              <small>선봉대 · 고속 룬 라이플</small>
+              <p><b>타입</b><i>연사형</i><b>공격력</b><i>★★☆☆☆</i><b>연사속도</b><i>매우 빠름</i><b>장탄수</b><i>30발</i></p>
+              <em>DRAGON BURST <span>7초</span></em>
+              <small class="skill-copy">4초간 5방향 분열 강화 사격</small>
+            </div>
+          </button>
+          <button type="button" class="hunter-card" data-character="phantom">
+            <span class="hunter-sprite-preview" data-character-preview="phantom" aria-hidden="true"></span>
+            <div>
+              <strong>RANGER</strong>
+              <small>레인저 · 그림자 석궁</small>
+              <p><b>타입</b><i>밸런스형</i><b>공격력</b><i>★★★☆☆</i><b>연사속도</b><i>빠름</i><b>장탄수</b><i>24발</i></p>
+              <em>SHADOW STEP <span>6초</span></em>
+              <small class="skill-copy">커서 방향 순간이동 + 1초 무적</small>
+            </div>
+          </button>
+          <button type="button" class="hunter-card" data-character="arcanist">
+            <span class="hunter-sprite-preview" data-character-preview="arcanist" aria-hidden="true"></span>
+            <div>
+              <strong>ARCANIST</strong>
+              <small>비전술사 · 아케인 건스태프</small>
+              <p><b>타입</b><i>스킬형</i><b>공격력</b><i>★★★★☆</i><b>연사속도</b><i>보통</i><b>장탄수</b><i>20발</i></p>
+              <em>ARCANE NOVA <span>7초</span></em>
+              <small class="skill-copy">전방위 마력탄 폭발 4연속 방출</small>
+            </div>
+          </button>
+          <button type="button" class="hunter-card" data-character="berserker">
+            <span class="hunter-sprite-preview" data-character-preview="berserker" aria-hidden="true"></span>
+            <div>
+              <strong>BERSERKER</strong>
+              <small>광전사 · 중형 핸드캐넌</small>
+              <p><b>타입</b><i>중화기형</i><b>공격력</b><i>★★★★★</i><b>연사속도</b><i>느림</i><b>장탄수</b><i>14발</i></p>
+              <em>BLOOD RUSH <span>8초</span></em>
+              <small class="skill-copy">2.6초간 초중량탄 · 피해/탄환 크기 대폭 강화</small>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="selection-panel boss-panel">
+        <h3><span>02</span> 사냥 대상</h3>
+        <div id="bossChoices" class="boss-cards">
+          <button type="button" class="boss-card selected" data-boss="wyrm">
+            <img src="assets/boss-card-wyrm.png" alt="심연의 와이번 ABYSS WYRM">
+            <div><strong>ABYSS WYRM</strong><small>심연의 와이번 · 화염 브레스 / 탄막 / INFERNO FAN</small></div>
+          </button>
+          <button type="button" class="boss-card" data-boss="golem">
+            <img src="assets/boss-card-golem.png" alt="철갑 골렘 IRON GOLEM">
+            <div><strong>IRON GOLEM</strong><small>철갑 골렘 · 암석탄 / 충격파 / EARTHSHATTER</small></div>
+          </button>
+          <button type="button" class="boss-card" data-boss="eye">
+            <img src="assets/boss-card-eye.png" alt="저주의 마안 CURSED EYE">
+            <div><strong>CURSED EYE</strong><small>저주의 마안 · 저주탄 / 회전탄 / DEATH RAY</small></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="selection-panel difficulty-panel">
+        <h3><span>03</span> 난이도</h3>
+        <div id="difficultyChoices" class="difficulty-cards">
+          <button type="button" data-difficulty="easy"><strong>EASY</strong><small>기본 압박 상향</small><small>패턴 간격 넓음</small></button>
+          <button type="button" class="selected" data-difficulty="normal"><strong>NORMAL</strong><small>추가 후속파 1회</small><small>추천</small></button>
+          <button type="button" data-difficulty="hard"><strong>HARD</strong><small>추가 후속파 2회</small><small>고밀도 패턴</small></button>
+          <button type="button" data-difficulty="endless"><strong>ENDLESS</strong><small>시간 제한 없음</small><small>시간이 갈수록 강화</small></button>
+        </div>
+
+        <div class="subsection-title">단일 특성</div>
+        <div id="assistChoices" class="assist-cards">
+          <button type="button" class="assist-card selected" data-assist="none"><strong>무옵션</strong><small>기본 규칙으로 플레이</small></button>
+          <button type="button" class="assist-card" data-assist="hpplus"><strong>HP 증가</strong><small>최대 HP +2</small></button>
+          <button type="button" class="assist-card" data-assist="bigshot"><strong>아군 탄환 확대</strong><small>탄환 크기 · 히트박스 +35%</small></button>
+          <button type="button" class="assist-card" data-assist="smallenemy"><strong>적 탄환 축소</strong><small>적 탄환 크기 · 히트박스 -22%</small></button>
+          <button type="button" class="assist-card" data-assist="quickskill"><strong>스킬 쿨타임 감소</strong><small>기본 쿨타임 25% 감소</small></button>
+          <button type="button" class="assist-card" data-assist="aimassist"><strong>유도탄</strong><small>발사 후 보스를 향해 일정 회전속도로 추적</small></button>
+        </div>
+
+        <div id="loadoutSummary" class="loadout-summary"></div>
+        <button type="button" id="launchBtn" class="primary launch-btn">HUNT START</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="gameScreen" class="screen hidden battle-screen">
+    <div class="battle-main">
+      <canvas id="gameCanvas" width="1280" height="720" aria-label="보스 전투 화면"></canvas>
+      <div class="player-hud">
+        <div class="player-hud-title"><span id="pilotText">VANGUARD</span><small id="hpText">HP 5/5</small></div>
+        <div class="hpbar playerbar"><i id="playerHpBar"></i></div>
+        <div class="ammo-hud">
+          <div><b id="ammoText">18 / 18</b><small id="reloadText">AMMO</small></div>
+          <div class="reload-track"><i id="reloadBar"></i></div>
+        </div>
+      </div>
+      <div class="boss-hud">
+        <div class="hud-title"><span id="bossName">ABYSS WYRM</span><b id="phaseText">PHASE 1</b></div>
+        <div class="hpbar bossbar"><i id="bossHpBar"></i></div>
+        <small id="bossHpText"></small>
+      </div>
+      <div class="battle-timer"><small>TIME</small><strong id="timerText">30.0</strong></div>
+      <div id="bossAnnouncement" class="boss-announcement hidden"></div>
+      <div id="pauseOverlay" class="pause-overlay hidden">
+        <div class="pause-card">
+          <p class="eyebrow">BATTLE PAUSED</p>
+          <h2>일시정지</h2>
+          <p id="pauseReason"></p>
+          <div>
+            <button type="button" id="resumeBtn" class="primary">계속하기</button>
+            <button type="button" id="pauseRetryBtn">다시 시작</button>
+            <button type="button" id="pauseMenuBtn">메인 메뉴</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side-hud">
+      <div class="hud-section">
+        <p class="eyebrow">CONTROLS</p>
+        <h3>조작</h3>
+        <div class="wasd"><span></span><kbd>W</kbd><span></span><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div>
+        <small>WASD / 방향키 이동</small>
+        <div class="control-row"><span class="mouse-icon left"><i></i></span><div><b>마우스 좌클릭</b><small>공격 / 길게 눌러 연사 · 탄창 소진 시 자동 재장전</small></div></div>
+        <div class="control-row"><span class="mouse-icon right"><i></i></span><div><b>마우스 우클릭</b><small>특수 스킬 사용</small></div></div>
+        <div class="control-row"><kbd>P / ESC</kbd><div><b>일시정지</b><small>P 또는 ESC로 열고 닫기</small></div></div>
+      </div>
+      <div class="hud-section skill-panel">
+        <p class="eyebrow">SPECIAL SKILL</p>
+        <h3 id="skillName">DRAGON BURST · 7초</h3>
+        <div class="skill-ring"><span id="skillText">READY</span><i id="skillCooldownRing"></i></div>
+        <div class="skill-bar"><i id="skillCooldownBar"></i></div>
+        <small id="assistText">특성: 무옵션</small>
+      </div>
+      <div class="battle-meta">
+        <span id="difficultyText">NORMAL</span>
+        <span id="modeHintText">30초 제한 · 보스 처치</span>
+        <button type="button" id="pauseBtn">P / ESC</button>
+      </div>
+    </aside>
+  </section>
+
+  <section id="resultScreen" class="screen hidden result-screen">
+    <div class="result-panel">
+      <p id="resultKicker" class="eyebrow"></p>
+      <h2 id="resultTitle"></h2>
+      <p id="resultReason"></p>
+      <div class="result-loadout" aria-label="이번 사냥 설정">
+        <div class="result-visual-card">
+          <small>CHARACTER</small>
+          <img id="resultCharacterImg" src="assets/portrait-striker-ingame-v41.png" alt="선택 캐릭터">
+          <b id="resultCharacterName">VANGUARD</b>
+        </div>
+        <div class="result-versus" aria-hidden="true">VS</div>
+        <div class="result-visual-card boss">
+          <small>BOSS</small>
+          <img id="resultBossImg" src="assets/boss-card-wyrm.png" alt="선택 보스">
+          <b id="resultBossName">ABYSS WYRM</b>
+        </div>
+        <div class="result-option-stack">
+          <div><small>DIFFICULTY</small><span id="resultDifficultyTag" class="result-option-pill difficulty normal">NORMAL</span></div>
+          <div><small>OPTION</small><span id="resultAssistTag" class="result-option-pill option">무옵션</span></div>
+        </div>
+      </div>
+      <div class="result-stats">
+        <div><small id="statLabel1">TIME</small><b id="resultStat1"></b></div>
+        <div><small id="statLabel2">HITS</small><b id="resultStat2"></b></div>
+        <div><small id="statLabel3">SHOTS</small><b id="resultStat3"></b></div>
+        <div><small id="statLabel4">ACC</small><b id="resultStat4"></b></div>
+      </div>
+      <p id="recordNotice"></p>
+      <div id="rankingEntry" class="ranking-entry hidden">
+        <h3>랭킹에 기록하시겠습니까?</h3>
+        <p>원하지 않으면 저장하지 않고 넘어갈 수 있습니다.</p>
+        <div>
+          <input id="nicknameInput" maxlength="12" placeholder="닉네임 1~12자">
+          <button type="button" id="saveRankBtn" class="primary">기록 저장</button>
+          <button type="button" id="skipRankBtn">저장하지 않기</button>
+        </div>
+        <small id="rankMessage"></small>
+      </div>
+      <div id="resultActions" class="result-actions">
+        <button type="button" id="retryBtn" class="primary">다시 도전</button>
+        <button type="button" id="resultMenuBtn">메인 메뉴</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="recordsScreen" class="screen hidden panel-screen">
+    <header class="topbar">
+      <div><p class="eyebrow">LOCAL RANKING</p><h2>사냥 기록</h2></div>
+      <button type="button" id="recordsBackBtn" class="ghost-btn">ESC · 메인</button>
+    </header>
+    <div class="records-layout">
+      <div class="records-filter-block">
+        <div class="filter-title">보스 선택 <span>필수</span></div>
+        <div id="rankBossChoices" class="rank-thumb-grid boss-grid">
+          <button type="button" class="rank-thumb selected" data-filter-group="boss" data-value="wyrm"><img src="assets/boss-card-wyrm.png" alt="심연의 와이번"><b>심연의 와이번</b><small>ABYSS WYRM</small></button>
+          <button type="button" class="rank-thumb" data-filter-group="boss" data-value="golem"><img src="assets/boss-card-golem.png" alt="철갑 골렘"><b>철갑 골렘</b><small>IRON GOLEM</small></button>
+          <button type="button" class="rank-thumb" data-filter-group="boss" data-value="eye"><img src="assets/boss-card-eye.png" alt="저주의 마안"><b>저주의 마안</b><small>CURSED EYE</small></button>
+        </div>
+
+        <div class="filters-compact">
+          <div>
+            <div class="filter-title">난이도 선택 <span>필수</span></div>
+            <div id="rankDifficultyChoices" class="pill-group">
+              <button type="button" class="pill selected" data-filter-group="difficulty" data-value="normal">NORMAL</button>
+              <button type="button" class="pill" data-filter-group="difficulty" data-value="easy">EASY</button>
+              <button type="button" class="pill" data-filter-group="difficulty" data-value="hard">HARD</button>
+              <button type="button" class="pill" data-filter-group="difficulty" data-value="endless">ENDLESS</button>
+            </div>
+          </div>
+          <div>
+            <div class="filter-title">특성 필터</div>
+            <div id="rankAssistChoices" class="pill-group">
+              <button type="button" class="pill selected" data-filter-group="assist" data-value="all">전체</button>
+              <button type="button" class="pill" data-filter-group="assist" data-value="none">무옵션</button>
+              <button type="button" class="pill" data-filter-group="assist" data-value="hpplus">HP 증가</button>
+              <button type="button" class="pill" data-filter-group="assist" data-value="bigshot">아군 탄환 확대</button>
+              <button type="button" class="pill" data-filter-group="assist" data-value="smallenemy">적 탄환 축소</button>
+              <button type="button" class="pill" data-filter-group="assist" data-value="quickskill">쿨타임 감소</button>
+              <button type="button" class="pill" data-filter-group="assist" data-value="aimassist">유도탄</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-title">헌터 필터</div>
+        <div id="rankCharacterChoices" class="rank-thumb-grid hunter-grid small-thumbs">
+          <button type="button" class="rank-thumb selected all-thumb" data-filter-group="character" data-value="all"><div class="thumb-all">ALL</div><b>전체 헌터</b><small>ALL CHARACTERS</small></button>
+          <button type="button" class="rank-thumb" data-filter-group="character" data-value="striker"><img src="assets/portrait-striker-ingame-v41.png" alt="선봉대"><b>선봉대</b><small>VANGUARD</small></button>
+          <button type="button" class="rank-thumb" data-filter-group="character" data-value="phantom"><img src="assets/portrait-phantom-ingame-v41.png" alt="레인저"><b>레인저</b><small>RANGER</small></button>
+          <button type="button" class="rank-thumb" data-filter-group="character" data-value="arcanist"><img src="assets/portrait-arcanist-ingame-v41.png" alt="비전술사"><b>비전술사</b><small>ARCANIST</small></button>
+          <button type="button" class="rank-thumb" data-filter-group="character" data-value="berserker"><img src="assets/portrait-berserker-ingame-v41.png" alt="광전사"><b>광전사</b><small>BERSERKER</small></button>
+        </div>
+
+        <div id="rankMetricBlock" class="hidden">
+          <div class="filter-title">무한 모드 랭킹 기준</div>
+          <div id="rankMetricChoices" class="pill-group">
+            <button type="button" class="pill selected" data-filter-group="metric" data-value="damage">누적 피해</button>
+            <button type="button" class="pill" data-filter-group="metric" data-value="survival">생존 시간</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="records-table-block">
+        <div class="rank-summary"><b id="recordsHeading">NORMAL · 심연의 와이번</b><small id="recordsSubHeading">캐릭터 전체 / 특성 전체</small></div>
+        <div id="recordsTableWrap" class="rank-wrap"></div>
+        <footer class="rank-footer"><span>현재 브라우저의 localStorage 기록입니다.</span><button type="button" id="resetRecordsBtn">랭킹 초기화</button></footer>
+      </div>
+    </div>
+  </section>
+
+  <section id="settingsScreen" class="screen hidden panel-screen">
+    <header class="topbar">
+      <div><p class="eyebrow">SETTINGS</p><h2>설정</h2></div>
+      <button type="button" id="settingsBackBtn" class="ghost-btn">ESC · 메인</button>
+    </header>
+    <div class="settings-layout">
+      <div class="settings-grid" id="settingsList">
+        <label data-preview="reducedMotion"><input id="reduceMotionToggle" type="checkbox"><span><b>움직임 줄이기</b><small>과한 화면 움직임과 파티클을 줄입니다.</small></span></label>
+        <label data-preview="screenShake"><input id="screenShakeToggle" type="checkbox"><span><b>화면 흔들림</b><small>강한 피격과 스킬의 흔들림을 표시합니다.</small></span></label>
+        <label data-preview="hitFlash"><input id="hitFlashToggle" type="checkbox"><span><b>피격 화면 효과</b><small>피격 순간의 짧은 색상 플래시를 표시합니다.</small></span></label>
+        <label data-preview="crosshair"><input id="crosshairToggle" type="checkbox"><span><b>조준점 표시</b><small>전투 중 마우스 조준점을 표시합니다.</small></span></label>
+        <label data-preview="specialTelegraph"><input id="specialTelegraphToggle" type="checkbox"><span><b>특수 공격 알림 표시</b><small>보스 특수 패턴의 범위 경고와 알림 배너를 표시합니다.</small></span></label>
+        <label data-preview="playerHitbox"><input id="playerHitboxToggle" type="checkbox"><span><b>캐릭터 히트박스 표시</b><small>전투 중 실제 피격 판정 중심과 범위를 표시합니다.</small></span></label>
+        <p>설정 항목에 마우스를 올리면 실제 게임 리소스를 사용한 OFF / ON 비교가 표시됩니다.</p>
+        <small id="saveStatus"></small>
+      </div>
+      <aside class="settings-preview" id="settingsPreview">
+        <div class="settings-preview-head"><p class="eyebrow">LIVE OPTION PREVIEW</p><h3 id="settingsPreviewTitle">캐릭터 히트박스 표시</h3><small id="settingsPreviewDesc">실제 피격 판정 중심과 범위를 비교합니다.</small></div>
+        <div class="settings-preview-pair">
+          <figure><figcaption>OFF</figcaption><canvas id="settingsPreviewOff" width="460" height="270"></canvas></figure>
+          <figure><figcaption>ON</figcaption><canvas id="settingsPreviewOn" width="460" height="270"></canvas></figure>
+        </div>
+        <p class="settings-preview-note">실제 전투 스프라이트와 동일한 판정값을 기준으로 미리보기합니다.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+<script src="game.js"></script>
+</body>
+</html>

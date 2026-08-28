@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+  <radialGradient id="sky" cx="72%" cy="12%" r="78%">
+    <stop offset="0" stop-color="#383b70"/><stop offset=".28" stop-color="#181b39"/><stop offset=".65" stop-color="#0d1023"/><stop offset="1" stop-color="#070811"/>
+  </radialGradient>
+  <linearGradient id="ground" x2="0" y2="1">
+    <stop stop-color="#171321"/><stop offset=".42" stop-color="#100d17"/><stop offset="1" stop-color="#07070c"/>
+  </linearGradient>
+  <linearGradient id="mist" x2="1"><stop stop-color="#9e95c7" stop-opacity="0"/><stop offset=".5" stop-color="#a59ac7" stop-opacity=".18"/><stop offset="1" stop-color="#9e95c7" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1280" height="720" fill="url(#sky)"/>
+<circle cx="1000" cy="98" r="105" fill="#d9def6" opacity=".86"/>
+<circle cx="972" cy="82" r="92" fill="#a9b2d8" opacity=".16"/>
+<path d="M0 400L115 290L210 375L335 240L465 395L585 275L720 390L858 245L995 400L1110 278L1280 390V535H0Z" fill="#0b0d1c"/>
+<path d="M0 462L165 342L285 445L410 330L535 470L680 350L825 462L990 328L1130 455L1280 355V560H0Z" fill="#080a15"/>
+<g fill="#14172a" opacity=".94">
+ <rect x="80" y="315" width="72" height="265"/><path d="M68 315L116 248L164 315Z"/>
+ <rect x="1090" y="300" width="84" height="278"/><path d="M1073 300L1132 215L1191 300Z"/>
+ <rect x="910" y="370" width="52" height="205"/><path d="M900 370L936 320L972 370Z"/>
+ <rect x="260" y="392" width="44" height="180"/><path d="M251 392L282 348L313 392Z"/>
+</g>
+<g stroke="#252942" stroke-width="10" fill="none" opacity=".65">
+ <path d="M745 525V450A82 82 0 0 1 909 450V525"/>
+ <path d="M40 543V498A58 58 0 0 1 156 498V543"/>
+</g>
+<rect y="515" width="1280" height="205" fill="url(#ground)"/>
+<path d="M0 580C150 548 255 599 390 570C570 530 730 608 890 566C1050 525 1150 582 1280 548" fill="none" stroke="#563440" stroke-width="4" opacity=".48"/>
+<g stroke="#352632" stroke-width="2" opacity=".52">
+ <path d="M85 548L52 720M245 542L220 720M420 548L392 720M612 538L590 720M830 544L808 720M1045 538L1020 720M1190 542L1170 720"/>
+</g>
+<ellipse cx="355" cy="526" rx="360" ry="35" fill="url(#mist)"/>
+<ellipse cx="960" cy="548" rx="430" ry="45" fill="url(#mist)"/>
+<path d="M0 696C220 660 405 712 615 680C830 646 1030 710 1280 670V720H0Z" fill="#05060b"/>
+</svg>

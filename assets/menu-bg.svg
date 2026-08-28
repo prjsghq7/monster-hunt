@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs></defs>
+<rect width="1600" height="900" fill="#070914"/>
+<radialGradient id="sky" cx="72%" cy="20%" r="65%">
+  <stop offset="0" stop-color="#313466"/><stop offset=".42" stop-color="#14172f"/><stop offset="1" stop-color="#070914"/>
+</radialGradient>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<circle cx="1190" cy="190" r="128" fill="#d8def6" opacity=".93"/>
+<circle cx="1155" cy="165" r="112" fill="#aeb8d8" opacity=".2"/>
+<path d="M0 620L190 430L340 545L490 370L680 565L825 410L1000 560L1210 390L1400 535L1600 390V900H0Z" fill="#0b0e20"/>
+<path d="M0 700L230 535L375 650L555 475L720 680L930 520L1110 690L1320 535L1600 690V900H0Z" fill="#070914"/>
+<g opacity=".6" fill="#12142a">
+  <rect x="120" y="405" width="80" height="330"/><path d="M110 405L160 335L210 405Z"/>
+  <rect x="1310" y="390" width="95" height="350"/><path d="M1295 390L1358 302L1420 390Z"/>
+  <rect x="1120" y="485" width="55" height="270"/><path d="M1112 485L1148 425L1183 485Z"/>
+</g>
+<g opacity=".28" fill="#7e6ea8">
+  <ellipse cx="470" cy="580" rx="390" ry="52"/><ellipse cx="1180" cy="640" rx="500" ry="70"/>
+</g>
+<!-- giant boss silhouette -->
+<g transform="translate(1120 350)" fill="#03040a" stroke="#331a31" stroke-width="8">
+  <path d="M0 -135C55 -120 90 -72 105 -20L176 -110L145 20L225 90L110 70L65 165L18 88L-28 165L-70 72L-195 100L-126 15L-166 -105L-88 -30C-72 -82 -45 -122 0 -135Z"/>
+  <path d="M-58 -112L-90 -178L-34 -132M58 -112L92 -178L34 -132" fill="none"/>
+  <ellipse cx="0" cy="-36" rx="42" ry="25" fill="#171025"/>
+  <ellipse cx="0" cy="-36" rx="17" ry="22" fill="#9a275b"/>
+  <path d="M0 -58L7 -36L0 -13L-7 -36Z" fill="#ff9b7a" stroke="none"/>
+</g>
+<path d="M0 790C260 720 520 815 760 758C1020 702 1260 810 1600 742V900H0Z" fill="#05060c"/>
+</svg>
